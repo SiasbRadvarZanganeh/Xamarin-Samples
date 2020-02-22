@@ -43,7 +43,7 @@ You need to add the following 2 properties to the **info.plist** in the IOS sect
 - A SearchBar is not implemented to filter the directories and files in a directory listing.
 
 ### Application Screen Recordings
-- [iPhone Screen Recording](https://github.com/SiasbRadvarZanganeh/Xamarin-Samples/BrowseStorage/XamarinForm/Assets/AppScreenRecordings/IOS.gif)
-- [Android Screen Recording](https://github.com/SiasbRadvarZanganeh/Xamarin-Samples/BrowseStorage/XamarinForm/Assets/AppScreenRecordings/Android.gif)
+- [iPhone Screen Recording](https://github.com/SiasbRadvarZanganeh/Xamarin-Samples/tree/master/BrowseStorageXamarinForm/Assets/AppScreenRecordings/IOS.gif)
+- [Android Screen Recording](https://github.com/SiasbRadvarZanganeh/Xamarin-Samples/tree/master/BrowseStorageXamarinForm/Assets/AppScreenRecordings/Android.gif)
 
 
