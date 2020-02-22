@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            mc:Ignorable="d"
+            xmlns:views="clr-namespace:BrowseStorageXamarinForm.Views"
+            x:Class="BrowseStorageXamarinForm.Views.MainPage"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom"
+            android:TabbedPage.BarItemColor="Black"
+            android:TabbedPage.BarSelectedItemColor="Red"
+            BarBackgroundColor="#F3E3B0" BarTextColor="Black"
+            NavigationPage.HasNavigationBar="False">
+
+    <TabbedPage.BarBackgroundColor>#F3E3B0</TabbedPage.BarBackgroundColor>
+    <TabbedPage.BarTextColor>#000000</TabbedPage.BarTextColor>
+    <TabbedPage.SelectedTabColor>#000000</TabbedPage.SelectedTabColor>
+    <TabbedPage.Children>
+        <NavigationPage Title="Browse">
+            <NavigationPage.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="iOS" Value="tab_feed.png" />
+                </OnPlatform>
+            </NavigationPage.Icon>
+            <x:Arguments>
+                <views:BrowseStoragePage />
+            </x:Arguments>
+        </NavigationPage>
+        <NavigationPage Title="About">
+            <NavigationPage.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="iOS" Value="tab_about.png" />
+                </OnPlatform>
+            </NavigationPage.Icon>
+            <x:Arguments>
+                <views:AboutPage />
+            </x:Arguments>
+        </NavigationPage>
+    </TabbedPage.Children>
+
+</TabbedPage>

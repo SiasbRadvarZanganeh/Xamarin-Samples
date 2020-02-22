@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:BrowseStorageXamarinForm.Services"
+             xmlns:vm="clr-namespace:BrowseStorageXamarinForm.ViewModels"
+             x:Class="BrowseStorageXamarinForm.Views.BrowseStoragePage"
+             x:Name="BrowsePage"
+             Title="Browse">
+
+    <ContentPage.BindingContext>
+        <vm:BrowseStorageViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness"
+                   iOS="5, 20, 0, 0"
+                   Android="5, 0, 0, 0" />
+    </ContentPage.Padding>
+
+
+    <ContentPage.Resources>
+
+        <Style TargetType="Grid">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                        Value="#F3E3B0" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+
+        <ResourceDictionary>
+            <DataTemplate x:Key="DirectoryItemTemplate">
+                <Grid Padding="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.RowSpan="2" 
+                               ImageSource="Folder59.png"                               
+                               HeightRequest="60" 
+                               WidthRequest="60"
+                               Command="{Binding BindingContext.FolderBrowseSubDirectoryButtonCommand, Source={x:Reference BrowsePage}}"
+                               CommandParameter="{Binding .}"
+                                                />
+
+                    <Label Grid.Column="1" 
+                               Text="{Binding Name}" 
+                               FontAttributes="Bold"
+                               VerticalTextAlignment="Center" />
+                </Grid>
+            </DataTemplate>
+            <DataTemplate x:Key="FileItemTemplate">
+                <Grid Padding="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.RowSpan="2" 
+                               Source="File.png"                               
+                               HeightRequest="60" 
+                               WidthRequest="60" />
+                    <Label Grid.Column="1" 
+                               Text="{Binding Name}" 
+                               FontAttributes="Bold"
+                               VerticalTextAlignment="Center" />
+                </Grid>
+            </DataTemplate>
+            <local:BrowseStorageDataTemplateSelector x:Key="BrowseStorageDataTemplateSelector"
+                DirectoryItemTemplate="{StaticResource DirectoryItemTemplate}"
+                FileItemTemplate="{StaticResource FileItemTemplate}" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout Margin="10">
+
+        <Label>
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="Path=" BackgroundColor="Beige" FontAttributes="Bold" FontSize="Large"/>
+                    <Span Text="{Binding DirectoryPath}" BackgroundColor="Beige" FontAttributes="Bold" FontSize="Medium" />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+
+        <Label>
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="Selected=" BackgroundColor="Beige" FontAttributes="Bold" FontSize="Large"/>
+                    <Span Text="{Binding Source={x:Reference DirectoryCollection}, Path=SelectedItem.Name}"
+                                  BackgroundColor="#F3E3B0" FontAttributes="Bold" FontSize="Large" />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+
+        <CollectionView x:Name="DirectoryCollection" ItemsSource="{Binding DirectoryItems}"
+                        ItemTemplate="{StaticResource BrowseStorageDataTemplateSelector}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedItem}"
+                        SelectionChangedCommand="{Binding BindingContext.DirectoryItemSelectionChangedCommand, Source={x:Reference BrowsePage}}"
+                        />
+
+    </StackLayout>
+
+
+
+</ContentPage>
